@@ -27,6 +27,8 @@ dependencies {
     compile 'com.zhy:mpermission-api:1.0.0'
     annotationProcessor 'com.zhy:mpermission-compiler:1.0.0'
     compile files('libs/tbs_sdk_thirdapp_v3.6.0.1183_43604.jar')
+    compile 'com.google.code.gson:gson:2.2.1'
+
 }
 
 repositories {

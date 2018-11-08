@@ -4,6 +4,7 @@ import android.view.View;
 import android.webkit.WebChromeClient;
 import android.webkit.WebViewClient;
 
+import com.prim.primweb.core.bridge.OnReturnValue;
 import com.prim.primweb.core.jsloader.AgentValueCallback;
 import com.prim.primweb.core.listener.OnScrollChangeListener;
 
@@ -95,5 +96,21 @@ public interface IAgentWebView<T> {
     void agentScrollBy(int x, int y);
 
     String getAgentUrl();
+
+
+    public <T> void callHandler(String method, Object[] args, final OnReturnValue<T> handler);
+
+    public void callHandler(String method, Object[] args);
+
+    public <T> void callHandler(String method, OnReturnValue<T> handler) ;
+
+
+    /**
+     * Test whether the handler exist in javascript
+     *
+     * @param handlerName
+     * @param existCallback
+     */
+    public void hasJavascriptMethod(String handlerName, OnReturnValue<Boolean> existCallback);
 
 }

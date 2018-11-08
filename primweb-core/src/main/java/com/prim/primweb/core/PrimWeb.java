@@ -26,6 +26,8 @@ import com.prim.primweb.core.handler.IKeyEventInterceptor;
 import com.prim.primweb.core.handler.KeyEventHandler;
 import com.prim.primweb.core.jsloader.CommonJSListener;
 import com.prim.primweb.core.jsloader.CommonJavaObject;
+import com.prim.primweb.core.plugin.DhpPluginApi;
+import com.prim.primweb.core.plugin.DhpPluginManager;
 import com.prim.primweb.core.uicontroller.AbsWebUIController;
 import com.prim.primweb.core.uicontroller.BaseIndicatorView;
 import com.prim.primweb.core.uicontroller.DefaultWebUIController;
@@ -178,6 +180,11 @@ public class PrimWeb {
         webLifeCycle = new WebLifeCycle(webView);
         if (builder.mJavaObject != null && !builder.mJavaObject.isEmpty()) {
             this.mJavaObject.putAll(builder.mJavaObject);
+        }
+
+        if (this.getWebView() != null) {
+            DhpPluginManager.init(this.getWebView());
+            this.getWebView().addJavascriptInterfaceAgent(new DhpPluginApi(), "dhp");
         }
     }
 
@@ -397,6 +404,7 @@ public class PrimWeb {
                 throw new NullPointerException("ViewGroup not null,please check your code!");
             }
             return new PerBuilder(new PrimWeb(this));
+
         }
 
         private void addJavaObject(String key, Object o) {
